@@ -1,12 +1,16 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
 body {
-    font-family: sans-serif;
+    font-family: 'Segoe UI', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #f0f2f5;
-    margin: 0;
+    background-color: #fff8f0;
     transition: background-color 0.3s ease;
 }
 
@@ -17,47 +21,103 @@ body.dark {
 .container {
     text-align: center;
     background-color: white;
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    padding: 50px 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    width: 360px;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 body.dark .container {
     background-color: #16213e;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 h1 {
-    margin-bottom: 30px;
+    font-size: 26px;
     color: #333;
+    margin-bottom: 8px;
     transition: color 0.3s ease;
 }
 
 body.dark h1 {
-    color: #e0e0e0;
+    color: #f0f0f0;
 }
 
-.numbers-container {
+.subtitle {
+    font-size: 14px;
+    color: #999;
+    margin-bottom: 32px;
+    transition: color 0.3s ease;
+}
+
+body.dark .subtitle {
+    color: #888;
+}
+
+.menu-card {
+    background: linear-gradient(135deg, #ff6b6b, #ffa500);
+    border-radius: 16px;
+    padding: 36px 24px;
+    margin-bottom: 28px;
+    min-height: 180px;
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    gap: 10px;
-    margin-bottom: 30px;
+    gap: 12px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-#generate-btn {
-    padding: 15px 30px;
-    font-size: 18px;
+.menu-card.animate {
+    animation: pop 0.35s ease;
+}
+
+@keyframes pop {
+    0%   { transform: scale(0.92); opacity: 0.6; }
+    60%  { transform: scale(1.04); opacity: 1; }
+    100% { transform: scale(1); }
+}
+
+.menu-emoji {
+    font-size: 56px;
+    line-height: 1;
+}
+
+.menu-name {
+    font-size: 22px;
+    font-weight: 700;
     color: white;
-    background-color: #007bff;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.2);
 }
 
-#generate-btn:hover {
-    background-color: #0056b3;
+.menu-category {
+    font-size: 13px;
+    color: rgba(255,255,255,0.85);
+    background: rgba(255,255,255,0.2);
+    padding: 4px 12px;
+    border-radius: 20px;
+}
+
+#recommend-btn {
+    padding: 14px 36px;
+    font-size: 17px;
+    font-weight: 600;
+    color: white;
+    background-color: #ff6b6b;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    width: 100%;
+}
+
+#recommend-btn:hover {
+    background-color: #e05555;
+}
+
+#recommend-btn:active {
+    transform: scale(0.97);
 }
 
 #theme-toggle {
