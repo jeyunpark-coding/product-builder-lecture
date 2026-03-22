@@ -120,6 +120,30 @@ body.dark .subtitle {
     transform: scale(0.97);
 }
 
+#lang-toggle {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    padding: 10px 18px;
+    font-size: 14px;
+    background-color: #ff6b6b;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    z-index: 100;
+}
+
+#lang-toggle:hover {
+    background-color: #e05555;
+}
+
+body.dark #lang-toggle {
+    background-color: #e05555;
+}
+
 #theme-toggle {
     position: fixed;
     top: 20px;
