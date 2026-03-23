@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>나는 강아지상? 고양이상? 🐾</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 40px 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 28px;
+            padding: 40px 32px;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+            text-align: center;
+        }
+
+        /* ── INTRO ── */
+        #screen-intro h1 {
+            font-size: 26px;
+            font-weight: 800;
+            color: #2d2d2d;
+            line-height: 1.3;
+            margin-bottom: 10px;
+        }
+        #screen-intro .desc {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 32px;
+            line-height: 1.6;
+        }
+        .animal-icons {
+            font-size: 72px;
+            margin-bottom: 28px;
+            letter-spacing: 8px;
+        }
+
+        /* ── CAM ── */
+        #screen-cam { display: none; }
+        #screen-cam h2 {
+            font-size: 18px;
+            color: #444;
+            margin-bottom: 18px;
+        }
+        #webcam-wrapper {
+            position: relative;
+            display: inline-block;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            margin-bottom: 20px;
+        }
+        #webcam-wrapper canvas {
+            display: block;
+            width: 300px !important;
+            height: 300px !important;
+        }
+        .live-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: #ff4757;
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 20px;
+            letter-spacing: 1px;
+            animation: blink 1.2s infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .bar-section { margin-bottom: 24px; }
+        .bar-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #444;
+        }
+        .bar-track {
+            background: #f0f0f0;
+            border-radius: 8px;
+            height: 14px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+        .bar-fill {
+            height: 100%;
+            border-radius: 8px;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+        #bar-dog { background: linear-gradient(90deg, #f7971e, #ffd200); }
+        #bar-cat { background: linear-gradient(90deg, #a18cd1, #fbc2eb); }
+
+        /* ── RESULT ── */
+        #screen-result { display: none; }
+        .result-animal {
+            font-size: 90px;
+            margin-bottom: 10px;
+            animation: popIn 0.5s cubic-bezier(.36,1.56,.64,1) both;
+        }
+        @keyframes popIn {
+            from { transform: scale(0); opacity: 0; }
+            to   { transform: scale(1); opacity: 1; }
+        }
+        .result-title {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+        .result-title.dog { color: #f7971e; }
+        .result-title.cat { color: #a18cd1; }
+        .result-pct {
+            font-size: 48px;
+            font-weight: 900;
+            margin-bottom: 4px;
+        }
+        .result-pct.dog { color: #f7971e; }
+        .result-pct.cat { color: #a18cd1; }
+        .result-sub {
+            font-size: 13px;
+            color: #aaa;
+            margin-bottom: 20px;
+        }
+        .result-desc {
+            background: #f9f6ff;
+            border-radius: 16px;
+            padding: 18px 20px;
+            font-size: 14px;
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 28px;
+            text-align: left;
+        }
+        .result-desc strong {
+            color: #7c5cbf;
+        }
+
+        /* ── BUTTONS ── */
+        .btn-primary {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            font-size: 17px;
+            font-weight: 700;
+            color: white;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: opacity 0.2s, transform 0.1s;
+            margin-bottom: 12px;
+        }
+        .btn-primary:hover { opacity: 0.9; }
+        .btn-primary:active { transform: scale(0.98); }
+
+        .btn-secondary {
+            display: block;
+            width: 100%;
+            padding: 13px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #764ba2;
+            background: #f3eeff;
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+        }
+        .btn-secondary:hover { background: #e8daff; }
+        .btn-secondary:active { transform: scale(0.98); }
+
+        .hint {
+            font-size: 12px;
+            color: #bbb;
+            margin-top: 10px;
+        }
+
+        /* result bars */
+        .mini-bars { margin: 16px 0; }
+        .mini-bar-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .mini-bar-track {
+            flex: 1;
+            background: #f0f0f0;
+            border-radius: 8px;
+            height: 12px;
+            overflow: hidden;
+        }
+        .mini-bar-fill {
+            height: 100%;
+            border-radius: 8px;
+            transition: width 1s ease;
+        }
+        .mini-bar-fill.dog { background: linear-gradient(90deg,#f7971e,#ffd200); }
+        .mini-bar-fill.cat { background: linear-gradient(90deg,#a18cd1,#fbc2eb); }
+        .mini-pct { width: 38px; text-align: right; color: #888; font-size: 13px; }
+    </style>
+</head>
+<body>
+<div class="card">
+
+    <!-- INTRO -->
+    <div id="screen-intro">
+        <div class="animal-icons">🐶🐱</div>
+        <h1>나는 강아지상?<br>고양이상?</h1>
+        <p class="desc">
+            AI가 당신의 얼굴을 분석해<br>
+            강아지상인지 고양이상인지 알려드려요!<br>
+            <br>
+            카메라를 허용하고 시작하세요 📸
+        </p>
+        <button class="btn-primary" onclick="startTest()">🐾 테스트 시작하기</button>
+        <p class="hint">카메라 접근 권한이 필요합니다</p>
+    </div>
+
+    <!-- CAM -->
+    <div id="screen-cam">
+        <h2>📸 얼굴을 화면에 맞춰주세요</h2>
+        <div id="webcam-wrapper">
+            <span class="live-badge">● LIVE</span>
+            <div id="webcam-container"></div>
+        </div>
+        <div class="bar-section">
+            <div class="bar-label"><span>🐶 강아지상</span><span id="pct-dog">0%</span></div>
+            <div class="bar-track"><div class="bar-fill" id="bar-dog"></div></div>
+            <div class="bar-label"><span>🐱 고양이상</span><span id="pct-cat">0%</span></div>
+            <div class="bar-track"><div class="bar-fill" id="bar-cat"></div></div>
+        </div>
+        <button class="btn-primary" id="capture-btn" onclick="captureResult()" disabled>
+            ✨ 결과 확인하기
+        </button>
+        <p class="hint" id="cam-hint">AI 모델 로딩 중...</p>
+    </div>
+
+    <!-- RESULT -->
+    <div id="screen-result">
+        <div class="result-animal" id="result-emoji"></div>
+        <div class="result-title" id="result-title"></div>
+        <div class="result-pct" id="result-pct"></div>
+        <div class="result-sub" id="result-sub"></div>
+        <div class="mini-bars">
+            <div class="mini-bar-row">
+                <span>🐶</span>
+                <div class="mini-bar-track"><div class="mini-bar-fill dog" id="res-bar-dog" style="width:0%"></div></div>
+                <span class="mini-pct" id="res-pct-dog"></span>
+            </div>
+            <div class="mini-bar-row">
+                <span>🐱</span>
+                <div class="mini-bar-track"><div class="mini-bar-fill cat" id="res-bar-cat" style="width:0%"></div></div>
+                <span class="mini-pct" id="res-pct-cat"></span>
+            </div>
+        </div>
+        <div class="result-desc" id="result-desc"></div>
+        <button class="btn-primary" onclick="retryTest()">🔄 다시 테스트하기</button>
+        <button class="btn-secondary" onclick="shareResult()">📤 결과 공유하기</button>
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+<script>
+const MODEL_URL = "https://teachablemachine.withgoogle.com/models/kea6xmcWf/";
+
+let model, webcam, maxPredictions;
+let isRunning = false;
+let latestPrediction = null;
+
+const DOG_TRAITS = [
+    { range: [90, 100], desc: "당신은 <strong>완벽한 강아지상</strong>이에요! 🐶<br>둥글둥글 사랑스러운 눈매와 포근한 인상이 강아지 그 자체! 보는 사람마다 기분이 좋아지는 밝고 친근한 매력을 가지고 있어요. 충성스럽고 따뜻한 성격으로 주변 사람들에게 항상 인기 만점이랍니다." },
+    { range: [70, 89], desc: "강아지상이 <strong>뚜렷하게</strong> 나타나요! 🐾<br>활발하고 에너지 넘치는 인상이에요. 웃을 때 눈이 초승달이 되는 귀여운 매력! 사교적이고 긍정적인 에너지로 어디서나 분위기 메이커 역할을 하는 타입이에요." },
+    { range: [55, 69], desc: "<strong>강아지상이 살짝 우세</strong>해요! 🐕<br>강아지의 순수함과 고양이의 세련됨을 동시에 지닌 매력적인 얼굴이에요. 다가가기 쉬우면서도 어딘가 신비로운 매력이 있어서 사람들이 자꾸 다가오게 된답니다." },
+];
+const CAT_TRAITS = [
+    { range: [90, 100], desc: "당신은 <strong>완벽한 고양이상</strong>이에요! 🐱<br>날카롭고 세련된 눈매, 쿨한 인상이 고양이 그 자체! 도도해 보이지만 친해지면 엄청 다정한 타입. 첫인상은 차가워 보여도 알수록 매력이 넘쳐나는 미스터리한 매력을 지녔어요." },
+    { range: [70, 89], desc: "고양이상이 <strong>뚜렷하게</strong> 나타나요! 😺<br>세련되고 독립적인 인상을 풍겨요. 스타일리시하고 자신만의 개성이 뚜렷한 타입! 쉽게 다가가기 어려운 것처럼 보이지만 관심사가 맞으면 깊게 교류하는 매력이 있어요." },
+    { range: [55, 69], desc: "<strong>고양이상이 살짝 우세</strong>해요! 🐈<br>고양이의 세련됨과 강아지의 친근함이 조화롭게 어우러진 얼굴이에요. 상황에 따라 카멜레온처럼 변하는 다재다능한 매력의 소유자예요!" },
+];
+
+function getTraitDesc(isdog, pct) {
+    const traits = isdog ? DOG_TRAITS : CAT_TRAITS;
+    for (const t of traits) {
+        if (pct >= t.range[0]) return t.desc;
+    }
+    return isdog
+        ? "강아지와 고양이의 매력을 <strong>모두 가진</strong> 희귀한 타입이에요! 🐾 어느 쪽이라고 딱 잘라 말하기 어려운, 그 자체로 독특한 매력이 있어요."
+        : "강아지와 고양이의 매력을 <strong>모두 가진</strong> 희귀한 타입이에요! 🐾 어느 쪽이라고 딱 잘라 말하기 어려운, 그 자체로 독특한 매력이 있어요.";
+}
+
+async function startTest() {
+    document.getElementById('screen-intro').style.display = 'none';
+    document.getElementById('screen-cam').style.display = 'block';
+
+    const modelURL = MODEL_URL + "model.json";
+    const metadataURL = MODEL_URL + "metadata.json";
+    model = await tmImage.load(modelURL, metadataURL);
+    maxPredictions = model.getTotalClasses();
+
+    webcam = new tmImage.Webcam(300, 300, true);
+    await webcam.setup();
+    await webcam.play();
+
+    document.getElementById('webcam-container').appendChild(webcam.canvas);
+    document.getElementById('cam-hint').textContent = '얼굴을 화면 중앙에 맞춰주세요';
+    document.getElementById('capture-btn').disabled = false;
+
+    isRunning = true;
+    loop();
+}
+
+async function loop() {
+    if (!isRunning) return;
+    webcam.update();
+    await predict();
+    requestAnimationFrame(loop);
+}
+
+async function predict() {
+    const prediction = await model.predict(webcam.canvas);
+    latestPrediction = prediction;
+
+    // find dog / cat index by class name
+    let dogP = 0, catP = 0;
+    for (const p of prediction) {
+        const name = p.className.toLowerCase();
+        if (name.includes('dog') || name.includes('강아지')) dogP = p.probability;
+        else if (name.includes('cat') || name.includes('고양이')) catP = p.probability;
+    }
+    // fallback: index 0=dog, 1=cat if names not matched
+    if (dogP === 0 && catP === 0 && prediction.length >= 2) {
+        dogP = prediction[0].probability;
+        catP = prediction[1].probability;
+    }
+
+    const dogPct = Math.round(dogP * 100);
+    const catPct = Math.round(catP * 100);
+
+    document.getElementById('bar-dog').style.width = dogPct + '%';
+    document.getElementById('bar-cat').style.width = catPct + '%';
+    document.getElementById('pct-dog').textContent = dogPct + '%';
+    document.getElementById('pct-cat').textContent = catPct + '%';
+}
+
+function captureResult() {
+    isRunning = false;
+    webcam.stop();
+
+    let dogP = 0, catP = 0;
+    if (latestPrediction) {
+        for (const p of latestPrediction) {
+            const name = p.className.toLowerCase();
+            if (name.includes('dog') || name.includes('강아지')) dogP = p.probability;
+            else if (name.includes('cat') || name.includes('고양이')) catP = p.probability;
+        }
+        if (dogP === 0 && catP === 0 && latestPrediction.length >= 2) {
+            dogP = latestPrediction[0].probability;
+            catP = latestPrediction[1].probability;
+        }
+    }
+
+    const dogPct = Math.round(dogP * 100);
+    const catPct = Math.round(catP * 100);
+    const isDog = dogPct >= catPct;
+
+    document.getElementById('screen-cam').style.display = 'none';
+    document.getElementById('screen-result').style.display = 'block';
+
+    document.getElementById('result-emoji').textContent = isDog ? '🐶' : '🐱';
+
+    const titleEl = document.getElementById('result-title');
+    titleEl.textContent = isDog ? '강아지상' : '고양이상';
+    titleEl.className = 'result-title ' + (isDog ? 'dog' : 'cat');
+
+    const pctEl = document.getElementById('result-pct');
+    const mainPct = isDog ? dogPct : catPct;
+    pctEl.textContent = mainPct + '%';
+    pctEl.className = 'result-pct ' + (isDog ? 'dog' : 'cat');
+
+    document.getElementById('result-sub').textContent =
+        isDog ? `고양이상 ${catPct}% vs 강아지상 ${dogPct}%`
+              : `강아지상 ${dogPct}% vs 고양이상 ${catPct}%`;
+
+    // animate bars after render
+    setTimeout(() => {
+        document.getElementById('res-bar-dog').style.width = dogPct + '%';
+        document.getElementById('res-bar-cat').style.width = catPct + '%';
+        document.getElementById('res-pct-dog').textContent = dogPct + '%';
+        document.getElementById('res-pct-cat').textContent = catPct + '%';
+    }, 100);
+
+    document.getElementById('result-desc').innerHTML = getTraitDesc(isDog, mainPct);
+}
+
+function retryTest() {
+    // reset
+    document.getElementById('webcam-container').innerHTML = '';
+    latestPrediction = null;
+    document.getElementById('screen-result').style.display = 'none';
+    document.getElementById('screen-intro').style.display = 'block';
+}
+
+function shareResult() {
+    const title = document.getElementById('result-title').textContent;
+    const pct = document.getElementById('result-pct').textContent;
+    const text = `나의 동물상 테스트 결과: ${title} ${pct}\n나도 테스트해보기 👉 ${location.href}`;
+    if (navigator.share) {
+        navigator.share({ title: '나는 강아지상? 고양이상?', text });
+    } else {
+        navigator.clipboard.writeText(text).then(() => alert('결과가 클립보드에 복사됐어요! 친구에게 공유해보세요 😊'));
+    }
+}
+</script>
+</body>
+</html>
