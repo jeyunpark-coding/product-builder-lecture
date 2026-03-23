@@ -47,68 +47,41 @@
             letter-spacing: 8px;
         }
 
-        /* ── CAM ── */
-        #screen-cam { display: none; }
-        #screen-cam h2 {
+        /* ── UPLOAD ── */
+        #screen-upload { display: none; }
+        #screen-upload h2 {
             font-size: 18px;
             color: #444;
             margin-bottom: 18px;
         }
-        #webcam-wrapper {
+        .upload-area {
+            border: 2px dashed #c4b0e8;
+            border-radius: 20px;
+            padding: 36px 20px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: background 0.2s, border-color 0.2s;
+            background: #faf7ff;
+        }
+        .upload-area:hover { background: #f3eeff; border-color: #a18cd1; }
+        .upload-area .upload-icon { font-size: 48px; margin-bottom: 10px; }
+        .upload-area p { font-size: 14px; color: #999; }
+        #file-input { display: none; }
+
+        #preview-wrapper {
+            display: none;
             position: relative;
-            display: inline-block;
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 8px 24px rgba(0,0,0,0.15);
             margin-bottom: 20px;
         }
-        #webcam-wrapper canvas {
+        #preview-img {
             display: block;
-            width: 300px !important;
-            height: 300px !important;
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
         }
-        .live-badge {
-            position: absolute;
-            top: 12px;
-            left: 12px;
-            background: #ff4757;
-            color: white;
-            font-size: 11px;
-            font-weight: 700;
-            padding: 4px 10px;
-            border-radius: 20px;
-            letter-spacing: 1px;
-            animation: blink 1.2s infinite;
-        }
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.4; }
-        }
-
-        .bar-section { margin-bottom: 24px; }
-        .bar-label {
-            display: flex;
-            justify-content: space-between;
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 6px;
-            color: #444;
-        }
-        .bar-track {
-            background: #f0f0f0;
-            border-radius: 8px;
-            height: 14px;
-            overflow: hidden;
-            margin-bottom: 10px;
-        }
-        .bar-fill {
-            height: 100%;
-            border-radius: 8px;
-            transition: width 0.3s ease;
-            width: 0%;
-        }
-        #bar-dog { background: linear-gradient(90deg, #f7971e, #ffd200); }
-        #bar-cat { background: linear-gradient(90deg, #a18cd1, #fbc2eb); }
 
         /* ── RESULT ── */
         #screen-result { display: none; }
@@ -232,29 +205,27 @@
             AI가 당신의 얼굴을 분석해<br>
             강아지상인지 고양이상인지 알려드려요!<br>
             <br>
-            카메라를 허용하고 시작하세요 📸
+            사진을 업로드하고 시작하세요 📸
         </p>
         <button class="btn-primary" onclick="startTest()">🐾 테스트 시작하기</button>
-        <p class="hint">카메라 접근 권한이 필요합니다</p>
+        <p class="hint">얼굴 사진 파일을 업로드합니다</p>
     </div>
 
-    <!-- CAM -->
-    <div id="screen-cam">
-        <h2>📸 얼굴을 화면에 맞춰주세요</h2>
-        <div id="webcam-wrapper">
-            <span class="live-badge">● LIVE</span>
-            <div id="webcam-container"></div>
+    <!-- UPLOAD -->
+    <div id="screen-upload">
+        <h2>📁 얼굴 사진을 업로드해주세요</h2>
+        <div class="upload-area" onclick="document.getElementById('file-input').click()">
+            <div class="upload-icon">🖼️</div>
+            <p>클릭하여 사진 선택<br><small>JPG, PNG, GIF 등</small></p>
         </div>
-        <div class="bar-section">
-            <div class="bar-label"><span>🐶 강아지상</span><span id="pct-dog">0%</span></div>
-            <div class="bar-track"><div class="bar-fill" id="bar-dog"></div></div>
-            <div class="bar-label"><span>🐱 고양이상</span><span id="pct-cat">0%</span></div>
-            <div class="bar-track"><div class="bar-fill" id="bar-cat"></div></div>
+        <input type="file" id="file-input" accept="image/*" onchange="onFileSelected(event)">
+        <div id="preview-wrapper">
+            <img id="preview-img" src="" alt="미리보기">
         </div>
-        <button class="btn-primary" id="capture-btn" onclick="captureResult()" disabled>
+        <button class="btn-primary" id="analyze-btn" onclick="analyzeImage()" disabled>
             ✨ 결과 확인하기
         </button>
-        <p class="hint" id="cam-hint">AI 모델 로딩 중...</p>
+        <p class="hint" id="upload-hint">AI 모델 로딩 중...</p>
     </div>
 
     <!-- RESULT -->
@@ -287,9 +258,8 @@
 <script>
 const MODEL_URL = "https://teachablemachine.withgoogle.com/models/1DIf71w_E/";
 
-let model, webcam, maxPredictions;
-let isRunning = false;
-let latestPrediction = null;
+let model;
+let selectedImage = null;
 
 const DOG_TRAITS = [
     { range: [90, 100], desc: "당신은 <strong>완벽한 강아지상</strong>이에요! 🐶<br>둥글둥글 사랑스러운 눈매와 포근한 인상이 강아지 그 자체! 보는 사람마다 기분이 좋아지는 밝고 친근한 매력을 가지고 있어요. 충성스럽고 따뜻한 성격으로 주변 사람들에게 항상 인기 만점이랍니다." },
@@ -314,44 +284,44 @@ function getTraitDesc(isdog, pct) {
 
 async function startTest() {
     document.getElementById('screen-intro').style.display = 'none';
-    document.getElementById('screen-cam').style.display = 'block';
+    document.getElementById('screen-upload').style.display = 'block';
 
     const modelURL = MODEL_URL + "model.json";
     const metadataURL = MODEL_URL + "metadata.json";
     model = await tmImage.load(modelURL, metadataURL);
-    maxPredictions = model.getTotalClasses();
 
-    webcam = new tmImage.Webcam(300, 300, true);
-    await webcam.setup();
-    await webcam.play();
-
-    document.getElementById('webcam-container').appendChild(webcam.canvas);
-    document.getElementById('cam-hint').textContent = '얼굴을 화면 중앙에 맞춰주세요';
-    document.getElementById('capture-btn').disabled = false;
-
-    isRunning = true;
-    loop();
+    document.getElementById('upload-hint').textContent = '사진을 선택해주세요';
 }
 
-async function loop() {
-    if (!isRunning) return;
-    webcam.update();
-    await predict();
-    requestAnimationFrame(loop);
+function onFileSelected(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        selectedImage = new Image();
+        selectedImage.onload = () => {
+            document.getElementById('preview-img').src = e.target.result;
+            document.getElementById('preview-wrapper').style.display = 'block';
+            document.getElementById('analyze-btn').disabled = false;
+            document.getElementById('upload-hint').textContent = '결과 확인하기 버튼을 눌러주세요';
+        };
+        selectedImage.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
 }
 
-async function predict() {
-    const prediction = await model.predict(webcam.canvas);
-    latestPrediction = prediction;
+async function analyzeImage() {
+    if (!selectedImage || !model) return;
 
-    // find dog / cat index by class name
+    const prediction = await model.predict(selectedImage);
+
     let dogP = 0, catP = 0;
     for (const p of prediction) {
         const name = p.className.toLowerCase();
         if (name.includes('dog') || name.includes('강아지')) dogP = p.probability;
         else if (name.includes('cat') || name.includes('고양이')) catP = p.probability;
     }
-    // fallback: index 0=dog, 1=cat if names not matched
     if (dogP === 0 && catP === 0 && prediction.length >= 2) {
         dogP = prediction[0].probability;
         catP = prediction[1].probability;
@@ -359,35 +329,9 @@ async function predict() {
 
     const dogPct = Math.round(dogP * 100);
     const catPct = Math.round(catP * 100);
-
-    document.getElementById('bar-dog').style.width = dogPct + '%';
-    document.getElementById('bar-cat').style.width = catPct + '%';
-    document.getElementById('pct-dog').textContent = dogPct + '%';
-    document.getElementById('pct-cat').textContent = catPct + '%';
-}
-
-function captureResult() {
-    isRunning = false;
-    webcam.stop();
-
-    let dogP = 0, catP = 0;
-    if (latestPrediction) {
-        for (const p of latestPrediction) {
-            const name = p.className.toLowerCase();
-            if (name.includes('dog') || name.includes('강아지')) dogP = p.probability;
-            else if (name.includes('cat') || name.includes('고양이')) catP = p.probability;
-        }
-        if (dogP === 0 && catP === 0 && latestPrediction.length >= 2) {
-            dogP = latestPrediction[0].probability;
-            catP = latestPrediction[1].probability;
-        }
-    }
-
-    const dogPct = Math.round(dogP * 100);
-    const catPct = Math.round(catP * 100);
     const isDog = dogPct >= catPct;
 
-    document.getElementById('screen-cam').style.display = 'none';
+    document.getElementById('screen-upload').style.display = 'none';
     document.getElementById('screen-result').style.display = 'block';
 
     document.getElementById('result-emoji').textContent = isDog ? '🐶' : '🐱';
@@ -396,8 +340,8 @@ function captureResult() {
     titleEl.textContent = isDog ? '강아지상' : '고양이상';
     titleEl.className = 'result-title ' + (isDog ? 'dog' : 'cat');
 
-    const pctEl = document.getElementById('result-pct');
     const mainPct = isDog ? dogPct : catPct;
+    const pctEl = document.getElementById('result-pct');
     pctEl.textContent = mainPct + '%';
     pctEl.className = 'result-pct ' + (isDog ? 'dog' : 'cat');
 
@@ -405,7 +349,6 @@ function captureResult() {
         isDog ? `고양이상 ${catPct}% vs 강아지상 ${dogPct}%`
               : `강아지상 ${dogPct}% vs 고양이상 ${catPct}%`;
 
-    // animate bars after render
     setTimeout(() => {
         document.getElementById('res-bar-dog').style.width = dogPct + '%';
         document.getElementById('res-bar-cat').style.width = catPct + '%';
@@ -417,9 +360,10 @@ function captureResult() {
 }
 
 function retryTest() {
-    // reset
-    document.getElementById('webcam-container').innerHTML = '';
-    latestPrediction = null;
+    selectedImage = null;
+    document.getElementById('file-input').value = '';
+    document.getElementById('preview-wrapper').style.display = 'none';
+    document.getElementById('analyze-btn').disabled = true;
     document.getElementById('screen-result').style.display = 'none';
     document.getElementById('screen-intro').style.display = 'block';
 }
