@@ -79,6 +79,14 @@ body.dark .subtitle {
     100% { transform: scale(1); }
 }
 
+.menu-image {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
 .menu-emoji {
     font-size: 56px;
     line-height: 1;

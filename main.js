@@ -1,7 +1,7 @@
 const menus = [
     { name: '삼겹살', emoji: '🥓', category: '한식' },
     { name: '치킨', emoji: '🍗', category: '한식' },
-    { name: '피자', emoji: '🍕', category: '양식' },
+    { name: '피자', emoji: '🍕', category: '양식', image: 'pizza01.jpg' },
     { name: '파스타', emoji: '🍝', category: '양식' },
     { name: '스테이크', emoji: '🥩', category: '양식' },
     { name: '초밥', emoji: '🍣', category: '일식' },
@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const menuEmoji = document.getElementById('menu-emoji');
     const menuName = document.getElementById('menu-name');
     const menuCategory = document.getElementById('menu-category');
+    const menuImage = document.getElementById('menu-image');
     const themeToggle = document.getElementById('theme-toggle');
 
     function showMenu() {
@@ -50,7 +51,16 @@ document.addEventListener('DOMContentLoaded', () => {
         void menuCard.offsetWidth; // reflow to restart animation
         menuCard.classList.add('animate');
 
-        menuEmoji.textContent = menu.emoji;
+        if (menu.image) {
+            menuImage.src = menu.image;
+            menuImage.alt = menu.name;
+            menuImage.style.display = 'block';
+            menuEmoji.style.display = 'none';
+        } else {
+            menuImage.style.display = 'none';
+            menuEmoji.style.display = 'block';
+            menuEmoji.textContent = menu.emoji;
+        }
         menuName.textContent = menu.name;
         menuCategory.textContent = menu.category;
     }
