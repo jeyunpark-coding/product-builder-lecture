@@ -128,6 +128,87 @@ body.dark .subtitle {
     transform: scale(0.97);
 }
 
+.partnership-section {
+    margin-top: 36px;
+    padding-top: 28px;
+    border-top: 1px solid #f0e0d0;
+    text-align: left;
+}
+
+body.dark .partnership-section {
+    border-top-color: #2a2a4a;
+}
+
+.partnership-section h2 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 6px;
+    transition: color 0.3s ease;
+}
+
+body.dark .partnership-section h2 {
+    color: #f0f0f0;
+}
+
+.partnership-desc {
+    font-size: 13px;
+    color: #999;
+    margin-bottom: 16px;
+}
+
+.partnership-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.partnership-form input,
+.partnership-form textarea {
+    width: 100%;
+    padding: 11px 14px;
+    font-size: 14px;
+    border: 1px solid #e0d0c0;
+    border-radius: 10px;
+    background: #fff8f0;
+    color: #333;
+    outline: none;
+    transition: border-color 0.2s ease, background 0.3s ease;
+    font-family: inherit;
+    resize: vertical;
+}
+
+body.dark .partnership-form input,
+body.dark .partnership-form textarea {
+    background: #1e1e3a;
+    border-color: #3a3a5a;
+    color: #f0f0f0;
+}
+
+.partnership-form input:focus,
+.partnership-form textarea:focus {
+    border-color: #ff6b6b;
+}
+
+.partnership-form button[type="submit"] {
+    padding: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    color: white;
+    background-color: #ff6b6b;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.partnership-form button[type="submit"]:hover {
+    background-color: #e05555;
+}
+
+.partnership-form button[type="submit"]:active {
+    transform: scale(0.97);
+}
+
 #lang-toggle {
     position: fixed;
     top: 20px;
