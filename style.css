@@ -128,6 +128,26 @@ body.dark .subtitle {
     transform: scale(0.97);
 }
 
+.animal-test-section {
+    margin-top: 20px;
+}
+
+.animal-test-btn {
+    display: block;
+    padding: 14px;
+    font-size: 15px;
+    font-weight: 700;
+    color: white;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-radius: 12px;
+    text-decoration: none;
+    text-align: center;
+    transition: opacity 0.2s, transform 0.1s;
+}
+
+.animal-test-btn:hover { opacity: 0.9; }
+.animal-test-btn:active { transform: scale(0.98); }
+
 .partnership-section {
     margin-top: 36px;
     padding-top: 28px;
