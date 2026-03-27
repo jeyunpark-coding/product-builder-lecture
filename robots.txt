@@ -1,8 +1,20 @@
 # robots.txt - 검색 엔진 크롤링 설정
 # Google, Naver 등 모든 검색 로봇에 적용
+#
+# 배포 도메인:
+#   정식(Canonical) 도메인 : https://thedevlab.dev
+#   Cloudflare Pages URL  : https://product-builder-lecture-evh.pages.dev
+#
+# 두 도메인 모두 동일한 콘텐츠를 서빙합니다.
+# 각 HTML 페이지의 <link rel="canonical"> 태그가 thedevlab.dev를 가리키므로
+# 검색엔진은 thedevlab.dev를 대표 URL로 인식합니다.
 
 User-agent: *
 Allow: /
 Disallow: /firebase-debug.log
 
+# 정식 도메인 사이트맵 (Google Search Console / Naver Search Advisor 제출용)
 Sitemap: https://thedevlab.dev/sitemap.xml
+
+# Cloudflare Pages 도메인 사이트맵
+Sitemap: https://product-builder-lecture-evh.pages.dev/sitemap.xml
