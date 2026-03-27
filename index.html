@@ -3,18 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>저녁 메뉴 추천기</title>
+
+    <!-- ============================================================
+         SEO: 타이틀 - 핵심 키워드 포함, 50~60자 이내
+    ============================================================ -->
+    <title>저녁 메뉴 추천기 - 오늘 저녁 뭐 먹을까? 랜덤 메뉴 추천</title>
+
+    <!-- ============================================================
+         SEO: 메타 설명 - 검색 결과 스니펫, 120~160자 이내
+    ============================================================ -->
+    <meta name="description" content="오늘 저녁 뭐 먹을지 고민된다면? 클릭 한 번으로 한식·일식·중식·양식 30가지 메뉴를 무료로 추천받아보세요! 삼겹살, 치킨, 초밥, 파스타 등 다양한 추천. 강아지상 고양이상 AI 테스트도 함께!">
+
+    <!-- SEO: 검색 키워드 (보조적 역할) -->
+    <meta name="keywords" content="저녁 메뉴 추천, 오늘 저녁 뭐 먹을까, 랜덤 메뉴 추천기, 저녁 메뉴 고르기, 한식 추천, 일식 추천, 저녁 뭐 먹지, 메뉴 고민 해결, 저녁 메뉴 종류">
+
+    <!-- SEO: 저작자 -->
+    <meta name="author" content="저녁 메뉴 추천기">
+
+    <!-- SEO: 로봇 크롤링 허용 -->
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
+    <!-- ============================================================
+         SEO: Naver Search Advisor 인증
+         ※ https://searchadvisor.naver.com 에서 발급 후 아래 content 교체
+    ============================================================ -->
+    <meta name="naver-site-verification" content="NAVER_VERIFICATION_CODE_HERE">
+
+    <!-- ============================================================
+         SEO: Canonical URL - 중복 콘텐츠 방지
+         ※ 실제 배포 도메인으로 교체 필요
+    ============================================================ -->
+    <link rel="canonical" href="https://thedevlab.dev/index.html">
+
+    <!-- ============================================================
+         SEO: hreflang - 다국어 페이지 연결 (Google/Naver 다국어 SEO)
+    ============================================================ -->
+    <link rel="alternate" hreflang="ko" href="https://thedevlab.dev/index.html">
+    <link rel="alternate" hreflang="en" href="https://thedevlab.dev/en.html">
+    <link rel="alternate" hreflang="x-default" href="https://thedevlab.dev/index.html">
+
+    <!-- ============================================================
+         SEO: Open Graph - SNS 공유 시 미리보기 (카카오, 페이스북 등)
+    ============================================================ -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="저녁 메뉴 추천기">
+    <meta property="og:title" content="저녁 메뉴 추천기 - 오늘 저녁 뭐 먹을까?">
+    <meta property="og:description" content="클릭 한 번으로 한식·일식·중식·양식 30가지 메뉴를 무료로 추천받아보세요! 오늘 저녁 고민 끝!">
+    <meta property="og:url" content="https://thedevlab.dev/index.html">
+    <meta property="og:image" content="https://thedevlab.dev/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="저녁 메뉴 추천기 - 오늘 저녁 뭐 먹을까?">
+    <meta property="og:locale" content="ko_KR">
+
+    <!-- ============================================================
+         SEO: Twitter Card - 트위터/X 공유 미리보기
+    ============================================================ -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="저녁 메뉴 추천기 - 오늘 저녁 뭐 먹을까?">
+    <meta name="twitter:description" content="클릭 한 번으로 한식·일식·중식·양식 30가지 메뉴 무료 추천!">
+    <meta name="twitter:image" content="https://thedevlab.dev/og-image.png">
+
+    <!-- ============================================================
+         SEO: JSON-LD 구조화 데이터 - 구글 리치 결과 지원
+         WebApplication + FAQPage 스키마
+    ============================================================ -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "@id": "https://thedevlab.dev/#webapp",
+          "name": "저녁 메뉴 추천기",
+          "url": "https://thedevlab.dev/",
+          "description": "오늘 저녁 뭐 먹을지 고민될 때 클릭 한 번으로 해결! 한식·일식·중식·양식 30가지 메뉴를 무료로 추천해드립니다.",
+          "applicationCategory": "LifestyleApplication",
+          "operatingSystem": "Any",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "KRW"
+          },
+          "inLanguage": ["ko", "en"],
+          "screenshot": "https://thedevlab.dev/og-image.png",
+          "featureList": [
+            "랜덤 저녁 메뉴 추천",
+            "한식·일식·중식·양식 30가지 메뉴",
+            "다크모드 지원",
+            "한국어·영어 지원",
+            "강아지상 고양이상 AI 테스트"
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://thedevlab.dev/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "저녁 메뉴 추천기는 어떻게 사용하나요?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "'메뉴 추천받기' 버튼을 클릭하면 한식, 일식, 중식, 양식 등 30가지 메뉴 중 하나를 무작위로 추천해드립니다. 마음에 들지 않으면 다시 버튼을 눌러보세요!"
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "어떤 메뉴를 추천해주나요?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "삼겹살, 치킨, 떡볶이, 삼계탕, 김치찌개 등 한식 12가지, 초밥, 라멘, 쌀국수 등 일식·아시아식 5가지, 피자, 파스타, 스테이크 등 양식 5가지, 짜장면, 짬뽕, 마라탕 등 중식 4가지를 추천합니다."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "무료로 이용할 수 있나요?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "네! 저녁 메뉴 추천기는 완전 무료입니다. 회원가입 없이 즉시 사용하실 수 있습니다."
+              }
+            }
+          ]
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "홈",
+              "item": "https://thedevlab.dev/"
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+
+    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" href="favicon.svg">
+
+    <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLC5JM9JN6"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-DLC5JM9JN6');
     </script>
+
     <!-- Microsoft Clarity -->
     <script type="text/javascript">
         (function(c,l,a,r,i,t,y){
@@ -25,34 +167,73 @@
     </script>
 </head>
 <body>
-    <button id="theme-toggle">🌙 Dark Mode</button>
-    <a href="en.html" id="lang-toggle">🌐 English</a>
+    <!-- 언어 전환 & 테마 버튼 -->
+    <a href="en.html" id="lang-toggle" aria-label="Switch to English">🌐 English</a>
+    <button id="theme-toggle" aria-label="다크 모드 전환">🌙 Dark Mode</button>
+
+    <!-- 메인 컨텐츠 -->
     <div class="container">
-        <h1>🍽️ 저녁 메뉴 추천기</h1>
-        <p class="subtitle">오늘 저녁 뭐 먹을지 고민되시나요?</p>
-        <div class="menu-card" id="menu-card">
-            <img class="menu-image" id="menu-image" src="" alt="" style="display:none;">
-            <div class="menu-emoji" id="menu-emoji">🍴</div>
+        <!-- SEO: H1 - 페이지당 하나, 핵심 키워드 포함 -->
+        <h1>저녁 메뉴 추천기</h1>
+        <p class="subtitle">오늘 저녁 뭐 먹을지 고민되시나요? 버튼을 눌러보세요!</p>
+
+        <!-- 메뉴 추천 카드 -->
+        <div class="menu-card" id="menu-card" role="region" aria-label="추천 메뉴 카드" aria-live="polite">
+            <img class="menu-image" id="menu-image" src="" alt="추천 메뉴 이미지" style="display:none;">
+            <div class="menu-emoji" id="menu-emoji" aria-hidden="true">🍴</div>
             <div class="menu-name" id="menu-name">버튼을 눌러 메뉴를 추천받아보세요!</div>
             <div class="menu-category" id="menu-category"></div>
         </div>
-        <button id="recommend-btn">🎲 메뉴 추천받기</button>
 
+        <button id="recommend-btn" aria-label="저녁 메뉴 랜덤 추천받기">🎲 메뉴 추천받기</button>
+
+        <!-- SEO: 내부 링크 - 관련 페이지 연결 -->
         <div class="animal-test-section">
-            <a href="animal.html" class="animal-test-btn">🐶🐱 나는 강아지상? 고양이상? 테스트하기</a>
+            <a href="animal.html" class="animal-test-btn" title="AI로 내 얼굴이 강아지상인지 고양이상인지 테스트해보세요">
+                🐶🐱 나는 강아지상? 고양이상? AI 테스트하기
+            </a>
         </div>
 
+        <!-- 제휴 문의 섹션 -->
         <div class="partnership-section">
-            <h2>🤝 제휴 문의</h2>
-            <p class="partnership-desc">레스토랑, 식품 브랜드 등 제휴에 관심 있으신가요?</p>
-            <form class="partnership-form" action="https://formspree.io/f/mwvrdrgq" method="POST">
-                <input type="text" name="name" placeholder="이름 / 회사명" required>
-                <input type="email" name="email" placeholder="이메일" required>
-                <textarea name="message" placeholder="문의 내용" rows="4" required></textarea>
+            <h2>제휴 문의</h2>
+            <p class="partnership-desc">레스토랑, 식품 브랜드 등 제휴에 관심 있으신가요? 아래 양식으로 문의해주세요.</p>
+            <form class="partnership-form" action="https://formspree.io/f/mwvrdrgq" method="POST" aria-label="제휴 문의 양식">
+                <label for="partner-name" class="sr-only">이름 또는 회사명</label>
+                <input type="text" id="partner-name" name="name" placeholder="이름 / 회사명" required autocomplete="organization">
+                <label for="partner-email" class="sr-only">이메일</label>
+                <input type="email" id="partner-email" name="email" placeholder="이메일" required autocomplete="email">
+                <label for="partner-message" class="sr-only">문의 내용</label>
+                <textarea id="partner-message" name="message" placeholder="문의 내용" rows="4" required></textarea>
                 <button type="submit">문의 보내기</button>
             </form>
         </div>
+
+        <!-- SEO: 콘텐츠 보강 - 검색 엔진이 페이지 주제를 이해하도록 -->
+        <section class="seo-content" aria-label="서비스 소개">
+            <h2>무료 저녁 메뉴 추천 서비스</h2>
+            <p>매일 저녁 "오늘 뭐 먹지?" 고민하시나요? 저녁 메뉴 추천기가 한식, 일식, 중식, 양식 중 랜덤으로 최고의 메뉴를 골라드립니다.</p>
+            <ul>
+                <li><strong>한식</strong>: 삼겹살, 치킨, 떡볶이, 삼계탕, 김치찌개, 된장찌개 등</li>
+                <li><strong>일식·아시아식</strong>: 초밥, 라멘, 쌀국수, 카레, 샤부샤부</li>
+                <li><strong>양식</strong>: 피자, 파스타, 스테이크, 버거, 타코</li>
+                <li><strong>중식</strong>: 짜장면, 짬뽕, 마라탕, 볶음밥</li>
+            </ul>
+        </section>
     </div>
+
+    <!-- SEO: 푸터 - 사이트 구조, 내부 링크, 저작권 -->
+    <footer class="site-footer">
+        <nav aria-label="사이트 맵">
+            <ul>
+                <li><a href="index.html" title="저녁 메뉴 추천기 홈">홈 (한국어)</a></li>
+                <li><a href="en.html" title="Dinner Menu Recommender in English">English</a></li>
+                <li><a href="animal.html" title="강아지상 고양이상 AI 테스트">강아지상 고양이상 테스트</a></li>
+            </ul>
+        </nav>
+        <p>&copy; 2026 저녁 메뉴 추천기. 무료 메뉴 추천 서비스.</p>
+    </footer>
+
     <script src="main.js"></script>
 </body>
 </html>

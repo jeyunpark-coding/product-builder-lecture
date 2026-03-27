@@ -3,18 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dinner Menu Recommender</title>
+
+    <!-- SEO: Title tag - keyword-rich, 50-60 chars -->
+    <title>Dinner Menu Recommender - What to Eat Tonight? Free Random Pick</title>
+
+    <!-- SEO: Meta description - shown in search results snippet -->
+    <meta name="description" content="Can't decide what to eat for dinner tonight? Click once to get a free random recommendation from 30 Korean, Japanese, Chinese, and Western dishes. No sign-up needed!">
+
+    <!-- SEO: Keywords -->
+    <meta name="keywords" content="dinner menu recommender, what to eat tonight, random dinner picker, meal ideas, dinner suggestion, food recommendation, tonight dinner">
+
+    <!-- SEO: Author -->
+    <meta name="author" content="Dinner Menu Recommender">
+
+    <!-- SEO: Robots -->
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
+    <!-- SEO: Canonical URL -->
+    <link rel="canonical" href="https://thedevlab.dev/en.html">
+
+    <!-- SEO: hreflang - multilingual page linking -->
+    <link rel="alternate" hreflang="ko" href="https://thedevlab.dev/index.html">
+    <link rel="alternate" hreflang="en" href="https://thedevlab.dev/en.html">
+    <link rel="alternate" hreflang="x-default" href="https://thedevlab.dev/index.html">
+
+    <!-- SEO: Open Graph - social sharing preview -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Dinner Menu Recommender">
+    <meta property="og:title" content="Dinner Menu Recommender - What to Eat Tonight?">
+    <meta property="og:description" content="Can't decide what's for dinner? One click gives you a free random recommendation from 30 dishes. Solve your dinner dilemma now!">
+    <meta property="og:url" content="https://thedevlab.dev/en.html">
+    <meta property="og:image" content="https://thedevlab.dev/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Dinner Menu Recommender - Random meal picker">
+    <meta property="og:locale" content="en_US">
+
+    <!-- SEO: Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Dinner Menu Recommender - What to Eat Tonight?">
+    <meta name="twitter:description" content="One click to get a free random dinner recommendation from 30 dishes!">
+    <meta name="twitter:image" content="https://thedevlab.dev/og-image.png">
+
+    <!-- SEO: JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "@id": "https://thedevlab.dev/en.html#webapp",
+          "name": "Dinner Menu Recommender",
+          "url": "https://thedevlab.dev/en.html",
+          "description": "Can't decide what to eat for dinner? Click once to get a free random recommendation from 30 Korean, Japanese, Chinese, and Western dishes.",
+          "applicationCategory": "LifestyleApplication",
+          "operatingSystem": "Any",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          },
+          "inLanguage": ["en", "ko"],
+          "featureList": [
+            "Random dinner menu recommendation",
+            "30 dishes: Korean, Japanese, Chinese, Western",
+            "Dark mode support",
+            "Korean & English language support"
+          ]
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://thedevlab.dev/en.html"
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+
+    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" href="favicon.svg">
+
+    <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLC5JM9JN6"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-DLC5JM9JN6');
     </script>
+
     <!-- Microsoft Clarity -->
     <script type="text/javascript">
         (function(c,l,a,r,i,t,y){
@@ -25,18 +113,57 @@
     </script>
 </head>
 <body>
-    <button id="theme-toggle">🌙 Dark Mode</button>
-    <a href="index.html" id="lang-toggle">🌐 한국어</a>
+    <!-- Language & theme controls -->
+    <a href="index.html" id="lang-toggle" aria-label="한국어로 전환">🌐 한국어</a>
+    <button id="theme-toggle" aria-label="Toggle dark mode">🌙 Dark Mode</button>
+
+    <!-- Main content -->
     <div class="container">
-        <h1>🍽️ Dinner Menu Recommender</h1>
-        <p class="subtitle">Not sure what to have for dinner tonight?</p>
-        <div class="menu-card" id="menu-card">
-            <div class="menu-emoji" id="menu-emoji">🍴</div>
+        <!-- SEO: H1 - one per page, includes primary keyword -->
+        <h1>Dinner Menu Recommender</h1>
+        <p class="subtitle">Not sure what to have for dinner tonight? Let us pick for you!</p>
+
+        <!-- Menu recommendation card -->
+        <div class="menu-card" id="menu-card" role="region" aria-label="Recommended menu card" aria-live="polite">
+            <div class="menu-emoji" id="menu-emoji" aria-hidden="true">🍴</div>
             <div class="menu-name" id="menu-name">Press the button to get a recommendation!</div>
             <div class="menu-category" id="menu-category"></div>
         </div>
-        <button id="recommend-btn">🎲 Recommend a Menu</button>
+
+        <button id="recommend-btn" aria-label="Get a random dinner recommendation">🎲 Recommend a Menu</button>
+
+        <!-- Internal link to related page -->
+        <div class="animal-test-section">
+            <a href="animal.html" class="animal-test-btn" title="AI test: Are you a dog person or cat person?">
+                🐶🐱 Dog Face or Cat Face? Take the AI Test!
+            </a>
+        </div>
+
+        <!-- SEO: Content for search engine context -->
+        <section class="seo-content" aria-label="Service description">
+            <h2>Free Random Dinner Menu Picker</h2>
+            <p>Struggling with "what's for dinner?" every night? Our free dinner menu recommender randomly picks the perfect meal from 30 options across Korean, Japanese, Chinese, and Western cuisines.</p>
+            <ul>
+                <li><strong>Korean</strong>: Samgyeopsal, Fried Chicken, Tteokbokki, Samgyetang, Kimchi Jjigae and more</li>
+                <li><strong>Japanese & Asian</strong>: Sushi, Ramen, Pho, Curry, Shabu-shabu</li>
+                <li><strong>Western</strong>: Pizza, Pasta, Steak, Burger, Tacos</li>
+                <li><strong>Chinese</strong>: Jjajangmyeon, Jjamppong, Malatang, Fried Rice</li>
+            </ul>
+        </section>
     </div>
+
+    <!-- SEO: Footer with site navigation and copyright -->
+    <footer class="site-footer">
+        <nav aria-label="Site map">
+            <ul>
+                <li><a href="en.html" title="Dinner Menu Recommender Home">Home (English)</a></li>
+                <li><a href="index.html" title="저녁 메뉴 추천기 - 한국어">한국어</a></li>
+                <li><a href="animal.html" title="Dog face or cat face AI test">Dog vs Cat Face Test</a></li>
+            </ul>
+        </nav>
+        <p>&copy; 2026 Dinner Menu Recommender. Free meal suggestion service.</p>
+    </footer>
+
     <script src="en.js"></script>
 </body>
 </html>
