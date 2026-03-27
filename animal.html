@@ -97,6 +97,11 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="apple-touch-icon" href="favicon.svg">
 
+    <!-- Kakao SDK for sharing -->
+    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js"
+            integrity="sha384-TiCUE00h649CAMonG018J2ujOgDKW/kVWlChEuu4jK2vxfAAD0eZxzCKakxg55G4"
+            crossorigin="anonymous"></script>
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLC5JM9JN6"></script>
     <script>
@@ -360,7 +365,14 @@
         </div>
         <div class="result-desc" id="result-desc"></div>
         <button class="btn-primary" onclick="retryTest()">🔄 다시 테스트하기</button>
-        <button class="btn-secondary" onclick="shareResult()">📤 결과 공유하기</button>
+
+        <!-- SNS 공유 버튼 -->
+        <p style="font-size:13px;color:#aaa;margin:16px 0 10px;font-weight:600;">결과 공유하기</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <button class="btn-secondary" onclick="shareKakao()" style="flex:1;min-width:0;background:#FEE500;color:#000;font-weight:700;">💬 카카오톡</button>
+            <button class="btn-secondary" onclick="shareTwitter()" style="flex:1;min-width:0;background:#000;color:#fff;">𝕏 트위터</button>
+            <button class="btn-secondary" onclick="shareCopy()" id="animal-copy-btn" style="flex:1;min-width:0;">🔗 복사</button>
+        </div>
     </div>
 
 </div>
@@ -490,16 +502,73 @@ function retryTest() {
     document.getElementById('screen-intro').style.display = 'block';
 }
 
-function shareResult() {
+const KAKAO_JS_KEY = 'YOUR_KAKAO_JS_KEY';
+const ANIMAL_SITE_URL = 'https://thedevlab.dev/animal.html';
+const OG_IMAGE_URL = 'https://thedevlab.dev/og-image-animal.png';
+
+if (typeof Kakao !== 'undefined' && KAKAO_JS_KEY !== 'YOUR_KAKAO_JS_KEY') {
+    Kakao.init(KAKAO_JS_KEY);
+}
+
+function getShareTexts() {
     const title = document.getElementById('result-title').textContent;
     const pct = document.getElementById('result-pct').textContent;
-    const text = `나의 동물상 테스트 결과: ${title} ${pct}\n나도 테스트해보기 👉 ${location.href}`;
-    if (navigator.share) {
-        navigator.share({ title: '나는 강아지상? 고양이상?', text });
+    const emoji = title === '강아지상' ? '🐶' : '🐱';
+    return {
+        title,
+        pct,
+        emoji,
+        short: `나는 ${emoji} ${title} ${pct}!`,
+        full: `AI 동물상 테스트 결과:\n나는 ${emoji} ${title} ${pct}!\n\n너도 테스트해봐 👇\n${ANIMAL_SITE_URL}`,
+    };
+}
+
+function shareKakao() {
+    const { title, pct, emoji } = getShareTexts();
+    if (typeof Kakao !== 'undefined' && Kakao.isInitialized()) {
+        Kakao.Share.sendDefault({
+            objectType: 'feed',
+            content: {
+                title: `나는 ${emoji} ${title} ${pct}!`,
+                description: `AI가 분석한 내 동물상 결과! 너도 테스트해봐 🐾`,
+                imageUrl: OG_IMAGE_URL,
+                link: { mobileWebUrl: ANIMAL_SITE_URL, webUrl: ANIMAL_SITE_URL },
+            },
+            buttons: [{
+                title: '나도 테스트하기',
+                link: { mobileWebUrl: ANIMAL_SITE_URL, webUrl: ANIMAL_SITE_URL },
+            }],
+        });
     } else {
-        navigator.clipboard.writeText(text).then(() => alert('결과가 클립보드에 복사됐어요! 친구에게 공유해보세요 😊'));
+        const { full } = getShareTexts();
+        if (navigator.share) {
+            navigator.share({ title: '나는 강아지상? 고양이상?', text: full, url: ANIMAL_SITE_URL });
+        } else {
+            navigator.clipboard.writeText(full).then(() => alert('클립보드에 복사됐어요! 친구에게 붙여넣기해서 공유하세요 😊'));
+        }
     }
 }
+
+function shareTwitter() {
+    const { full } = getShareTexts();
+    const tweetUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(full)}&hashtags=${encodeURIComponent('동물상테스트,강아지상,고양이상,AI테스트')}`;
+    window.open(tweetUrl, '_blank', 'noopener,noreferrer,width=600,height=500');
+}
+
+function shareCopy() {
+    const { full } = getShareTexts();
+    navigator.clipboard.writeText(full).then(() => {
+        const btn = document.getElementById('animal-copy-btn');
+        const original = btn.textContent;
+        btn.textContent = '✅ 복사됨!';
+        setTimeout(() => { btn.textContent = original; }, 2000);
+    }).catch(() => {
+        alert(`아래 텍스트를 복사해서 공유해보세요:\n\n${full}`);
+    });
+}
+
+// 기존 shareResult 호환성 유지
+function shareResult() { shareKakao(); }
 </script>
 </body>
 </html>

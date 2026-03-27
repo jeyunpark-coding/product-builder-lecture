@@ -195,6 +195,11 @@
     <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
 
+    <!-- Kakao SDK for sharing -->
+    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js"
+            integrity="sha384-TiCUE00h649CAMonG018J2ujOgDKW/kVWlChEuu4jK2vxfAAD0eZxzCKakxg55G4"
+            crossorigin="anonymous"></script>
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLC5JM9JN6"></script>
     <script>
@@ -232,6 +237,25 @@
         </div>
 
         <button id="recommend-btn" aria-label="Get a random dinner recommendation">🎲 Recommend a Menu</button>
+
+        <!-- SNS Share section: appears after recommendation -->
+        <div class="share-section" id="share-section" hidden>
+            <p class="share-label">Share your dinner pick with friends!</p>
+            <div class="share-buttons">
+                <button class="share-btn share-kakao" id="share-kakao" aria-label="Share on KakaoTalk">
+                    <span class="share-icon">💬</span>KakaoTalk
+                </button>
+                <button class="share-btn share-twitter" id="share-twitter" aria-label="Share on X (Twitter)">
+                    <span class="share-icon">𝕏</span>Twitter
+                </button>
+                <button class="share-btn share-facebook" id="share-facebook" aria-label="Share on Facebook">
+                    <span class="share-icon">f</span>Facebook
+                </button>
+                <button class="share-btn share-copy" id="share-copy" aria-label="Copy link">
+                    <span class="share-icon">🔗</span>Copy
+                </button>
+            </div>
+        </div>
 
         <!-- Internal link to related page -->
         <div class="animal-test-section">

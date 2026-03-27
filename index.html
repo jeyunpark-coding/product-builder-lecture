@@ -228,6 +228,13 @@
     <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
 
+    <!-- 카카오 SDK (공유 기능용)
+         ※ https://developers.kakao.com 에서 앱 등록 후 JavaScript Key를 발급받아
+           main.js 상단의 KAKAO_JS_KEY 값을 교체하세요 -->
+    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js"
+            integrity="sha384-TiCUE00h649CAMonG018J2ujOgDKW/kVWlChEuu4jK2vxfAAD0eZxzCKakxg55G4"
+            crossorigin="anonymous"></script>
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLC5JM9JN6"></script>
     <script>
@@ -266,6 +273,25 @@
         </div>
 
         <button id="recommend-btn" aria-label="저녁 메뉴 랜덤 추천받기">🎲 메뉴 추천받기</button>
+
+        <!-- SNS 공유 섹션: 메뉴 추천 후 나타남 -->
+        <div class="share-section" id="share-section" hidden>
+            <p class="share-label">친구에게 공유해서 같이 먹어요!</p>
+            <div class="share-buttons">
+                <button class="share-btn share-kakao" id="share-kakao" aria-label="카카오톡으로 공유">
+                    <span class="share-icon">💬</span>카카오톡
+                </button>
+                <button class="share-btn share-twitter" id="share-twitter" aria-label="X(트위터)로 공유">
+                    <span class="share-icon">𝕏</span>X(트위터)
+                </button>
+                <button class="share-btn share-facebook" id="share-facebook" aria-label="페이스북으로 공유">
+                    <span class="share-icon">f</span>페이스북
+                </button>
+                <button class="share-btn share-copy" id="share-copy" aria-label="링크 복사">
+                    <span class="share-icon">🔗</span>복사
+                </button>
+            </div>
+        </div>
 
         <!-- SEO: 내부 링크 - 관련 페이지 연결 -->
         <div class="animal-test-section">
