@@ -285,6 +285,257 @@ body.dark #theme-toggle:hover {
 }
 
 /* ============================================================
+   GEO: 상황별 추천 섹션 (Situation Cards)
+============================================================ */
+.geo-situations {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid #f0e0d0;
+    text-align: left;
+}
+
+body.dark .geo-situations {
+    border-top-color: #2a2a4a;
+}
+
+.geo-situations h2 {
+    font-size: 15px;
+    color: #555;
+    margin-bottom: 14px;
+    font-weight: 700;
+    text-align: center;
+    transition: color 0.3s ease;
+}
+
+body.dark .geo-situations h2 {
+    color: #aaa;
+}
+
+.situation-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.situation-card {
+    background: #fff8f0;
+    border-radius: 12px;
+    padding: 12px;
+    transition: background 0.3s ease;
+}
+
+body.dark .situation-card {
+    background: #1a1a30;
+}
+
+.situation-icon {
+    font-size: 22px;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.situation-card h3 {
+    font-size: 12px;
+    font-weight: 700;
+    color: #444;
+    margin: 0 0 5px;
+    transition: color 0.3s ease;
+}
+
+body.dark .situation-card h3 {
+    color: #ccc;
+}
+
+.situation-card p {
+    font-size: 11px;
+    color: #888;
+    line-height: 1.6;
+    margin: 0;
+    transition: color 0.3s ease;
+}
+
+body.dark .situation-card p {
+    color: #666;
+}
+
+/* ============================================================
+   GEO: HowTo 단계 섹션
+============================================================ */
+.howto-section {
+    margin-top: 28px;
+    padding-top: 24px;
+    border-top: 1px solid #f0e0d0;
+    text-align: left;
+}
+
+body.dark .howto-section {
+    border-top-color: #2a2a4a;
+}
+
+.howto-section h2 {
+    font-size: 15px;
+    color: #555;
+    margin-bottom: 14px;
+    font-weight: 700;
+    text-align: center;
+    transition: color 0.3s ease;
+}
+
+body.dark .howto-section h2 {
+    color: #aaa;
+}
+
+.howto-steps {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    counter-reset: step-counter;
+}
+
+.howto-steps li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #f5f0eb;
+    counter-increment: step-counter;
+    transition: border-color 0.3s ease;
+}
+
+body.dark .howto-steps li {
+    border-bottom-color: #2a2a3a;
+}
+
+.howto-steps li::before {
+    content: counter(step-counter);
+    min-width: 24px;
+    height: 24px;
+    background: #ff6b6b;
+    color: white;
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+.howto-steps li strong {
+    font-size: 12px;
+    color: #444;
+    white-space: nowrap;
+    transition: color 0.3s ease;
+}
+
+body.dark .howto-steps li strong {
+    color: #ccc;
+}
+
+.howto-steps li span {
+    font-size: 12px;
+    color: #888;
+    line-height: 1.6;
+    transition: color 0.3s ease;
+}
+
+body.dark .howto-steps li span {
+    color: #666;
+}
+
+/* ============================================================
+   GEO: FAQ 아코디언 섹션
+============================================================ */
+.faq-section {
+    margin-top: 28px;
+    padding-top: 24px;
+    border-top: 1px solid #f0e0d0;
+    text-align: left;
+}
+
+body.dark .faq-section {
+    border-top-color: #2a2a4a;
+}
+
+.faq-section h2 {
+    font-size: 15px;
+    color: #555;
+    margin-bottom: 12px;
+    font-weight: 700;
+    text-align: center;
+    transition: color 0.3s ease;
+}
+
+body.dark .faq-section h2 {
+    color: #aaa;
+}
+
+.faq-section details {
+    border-bottom: 1px solid #f0eae5;
+    transition: border-color 0.3s ease;
+}
+
+body.dark .faq-section details {
+    border-bottom-color: #2a2a3a;
+}
+
+.faq-section summary {
+    cursor: pointer;
+    padding: 11px 4px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #444;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s ease;
+    user-select: none;
+}
+
+.faq-section summary::-webkit-details-marker {
+    display: none;
+}
+
+.faq-section summary::before {
+    content: '＋';
+    font-size: 14px;
+    color: #ff6b6b;
+    flex-shrink: 0;
+    line-height: 1;
+}
+
+.faq-section details[open] summary::before {
+    content: '－';
+}
+
+.faq-section summary:hover {
+    color: #ff6b6b;
+}
+
+body.dark .faq-section summary {
+    color: #bbb;
+}
+
+body.dark .faq-section summary:hover {
+    color: #ff8080;
+}
+
+.faq-section details p {
+    padding: 4px 4px 14px 24px;
+    font-size: 13px;
+    color: #777;
+    line-height: 1.75;
+    margin: 0;
+    transition: color 0.3s ease;
+}
+
+body.dark .faq-section details p {
+    color: #666;
+}
+
+/* ============================================================
    SEO: 스크린 리더 전용 텍스트 (접근성)
 ============================================================ */
 .sr-only {

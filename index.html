@@ -65,34 +65,82 @@
     <meta name="twitter:image" content="https://thedevlab.dev/og-image.png">
 
     <!-- ============================================================
-         SEO: JSON-LD 구조화 데이터 - 구글 리치 결과 지원
-         WebApplication + FAQPage 스키마
+         GEO + SEO: JSON-LD 구조화 데이터
+         WebApplication + FAQPage(대화형) + HowTo + Organization
+         → AI 검색(ChatGPT, Gemini, Perplexity 등)에 인용되기 좋은 형식
     ============================================================ -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@graph": [
         {
+          "@type": "Organization",
+          "@id": "https://thedevlab.dev/#organization",
+          "name": "저녁 메뉴 추천기",
+          "url": "https://thedevlab.dev/",
+          "description": "매일 저녁 메뉴 고민을 해결해주는 무료 랜덤 메뉴 추천 서비스. 한식·일식·중식·양식 30가지 메뉴 제공.",
+          "foundingDate": "2025",
+          "knowsAbout": ["저녁 메뉴 추천", "한식", "일식", "중식", "양식", "랜덤 메뉴"],
+          "sameAs": [
+            "https://product-builder-lecture-evh.pages.dev/"
+          ]
+        },
+        {
           "@type": "WebApplication",
           "@id": "https://thedevlab.dev/#webapp",
           "name": "저녁 메뉴 추천기",
           "url": "https://thedevlab.dev/",
-          "description": "오늘 저녁 뭐 먹을지 고민될 때 클릭 한 번으로 해결! 한식·일식·중식·양식 30가지 메뉴를 무료로 추천해드립니다.",
+          "description": "오늘 저녁 뭐 먹을지 고민될 때 클릭 한 번으로 해결! 한식·일식·중식·양식 30가지 메뉴를 무료로 추천해드립니다. 회원가입 없이 즉시 사용 가능.",
           "applicationCategory": "LifestyleApplication",
           "operatingSystem": "Any",
+          "dateModified": "2026-03-27",
           "offers": {
             "@type": "Offer",
             "price": "0",
-            "priceCurrency": "KRW"
+            "priceCurrency": "KRW",
+            "availability": "https://schema.org/InStock"
           },
           "inLanguage": ["ko", "en"],
           "screenshot": "https://thedevlab.dev/og-image.png",
           "featureList": [
-            "랜덤 저녁 메뉴 추천",
-            "한식·일식·중식·양식 30가지 메뉴",
+            "랜덤 저녁 메뉴 추천 (30가지)",
+            "한식·일식·중식·양식 다양한 메뉴",
             "다크모드 지원",
             "한국어·영어 지원",
+            "회원가입 불필요",
             "강아지상 고양이상 AI 테스트"
+          ]
+        },
+        {
+          "@type": "HowTo",
+          "@id": "https://thedevlab.dev/#howto",
+          "name": "저녁 메뉴 추천기 사용 방법",
+          "description": "버튼 하나로 오늘 저녁 메뉴를 추천받는 방법을 안내합니다.",
+          "totalTime": "PT10S",
+          "estimatedCost": {
+            "@type": "MonetaryAmount",
+            "currency": "KRW",
+            "value": "0"
+          },
+          "step": [
+            {
+              "@type": "HowToStep",
+              "position": 1,
+              "name": "사이트 접속",
+              "text": "thedevlab.dev에 접속합니다. 회원가입이나 로그인 없이 바로 사용할 수 있습니다."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 2,
+              "name": "추천 버튼 클릭",
+              "text": "'🎲 메뉴 추천받기' 버튼을 클릭합니다. 한식, 일식, 중식, 양식 중 랜덤으로 오늘의 저녁 메뉴를 추천해드립니다."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 3,
+              "name": "마음에 들 때까지 반복",
+              "text": "추천 메뉴가 마음에 들지 않으면 버튼을 다시 눌러보세요. 30가지 메뉴 중 취향에 맞는 메뉴를 찾을 수 있습니다."
+            }
           ]
         },
         {
@@ -101,26 +149,58 @@
           "mainEntity": [
             {
               "@type": "Question",
-              "name": "저녁 메뉴 추천기는 어떻게 사용하나요?",
+              "name": "오늘 저녁 뭐 먹을지 고민될 때 어떻게 하나요?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "'메뉴 추천받기' 버튼을 클릭하면 한식, 일식, 중식, 양식 등 30가지 메뉴 중 하나를 무작위로 추천해드립니다. 마음에 들지 않으면 다시 버튼을 눌러보세요!"
+                "text": "저녁 메뉴 추천기(thedevlab.dev)에서 '메뉴 추천받기' 버튼을 클릭하면 한식, 일식, 중식, 양식 등 30가지 메뉴 중 하나를 무작위로 추천해드립니다. 10초 안에 저녁 메뉴 고민을 해결할 수 있습니다."
               }
             },
             {
               "@type": "Question",
-              "name": "어떤 메뉴를 추천해주나요?",
+              "name": "저녁 메뉴 추천기에서 어떤 메뉴를 추천해주나요?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "삼겹살, 치킨, 떡볶이, 삼계탕, 김치찌개 등 한식 12가지, 초밥, 라멘, 쌀국수 등 일식·아시아식 5가지, 피자, 파스타, 스테이크 등 양식 5가지, 짜장면, 짬뽕, 마라탕 등 중식 4가지를 추천합니다."
+                "text": "총 30가지 메뉴를 추천합니다. 한식: 삼겹살, 치킨, 떡볶이, 삼계탕, 김치찌개, 된장찌개, 불고기, 갈비탕, 순두부찌개, 비빔밥, 냉면, 제육볶음. 일식·아시아식: 초밥, 라멘, 쌀국수, 카레, 샤부샤부. 양식: 피자, 파스타, 스테이크, 버거, 타코. 중식: 짜장면, 짬뽕, 마라탕, 볶음밥, 규동, 연어덮밥."
               }
             },
             {
               "@type": "Question",
-              "name": "무료로 이용할 수 있나요?",
+              "name": "저녁 메뉴 추천기는 무료인가요?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "네! 저녁 메뉴 추천기는 완전 무료입니다. 회원가입 없이 즉시 사용하실 수 있습니다."
+                "text": "네, 완전 무료입니다. 회원가입, 로그인, 앱 설치 없이 웹 브라우저에서 즉시 사용할 수 있습니다."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "퇴근 후 지쳤을 때 저녁 메뉴 추천 받을 수 있나요?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "물론입니다. 저녁 메뉴 추천기는 퇴근 후 피곤한 직장인, 요리하기 귀찮은 날, 배달 메뉴 고르기 어려운 날 모두 활용할 수 있습니다. 버튼 한 번으로 10초 안에 결정하세요."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "가족과 함께 저녁 메뉴 고를 때 사용할 수 있나요?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "네! 가족 간 저녁 메뉴를 놓고 의견이 엇갈릴 때, 저녁 메뉴 추천기로 공정하게 랜덤 추첨하면 갈등 없이 결정할 수 있습니다. 마음에 안 들면 다시 뽑을 수 있어요."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "혼밥(혼자 먹기)할 때 어떤 메뉴가 좋을까요?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "혼밥에 좋은 메뉴로는 라멘, 규동, 냉면, 비빔밥, 짜장면, 초밥 등이 있습니다. 저녁 메뉴 추천기를 계속 눌러서 혼밥하기 좋은 메뉴를 찾아보세요!"
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "모바일에서도 사용할 수 있나요?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "네, 스마트폰과 태블릿 등 모든 기기에서 사용 가능합니다. 앱 설치 없이 모바일 브라우저로 thedevlab.dev에 접속하면 됩니다."
               }
             }
           ]
@@ -209,16 +289,97 @@
             </form>
         </div>
 
-        <!-- SEO: 콘텐츠 보강 - 검색 엔진이 페이지 주제를 이해하도록 -->
-        <section class="seo-content" aria-label="서비스 소개">
-            <h2>무료 저녁 메뉴 추천 서비스</h2>
-            <p>매일 저녁 "오늘 뭐 먹지?" 고민하시나요? 저녁 메뉴 추천기가 한식, 일식, 중식, 양식 중 랜덤으로 최고의 메뉴를 골라드립니다.</p>
+        <!-- GEO: 상황별 추천 (Who/When/How) - AI 인용을 위한 상황 맥락 콘텐츠 -->
+        <section class="geo-situations" aria-label="상황별 저녁 메뉴 추천">
+            <h2>이런 상황에서 사용하세요</h2>
+            <div class="situation-grid">
+                <div class="situation-card">
+                    <span class="situation-icon" aria-hidden="true">💼</span>
+                    <h3>퇴근 후 지칠 때</h3>
+                    <p>하루 종일 일하고 저녁 메뉴 고를 에너지도 없다면? 버튼 하나로 10초 만에 해결하세요.</p>
+                </div>
+                <div class="situation-card">
+                    <span class="situation-icon" aria-hidden="true">👨‍👩‍👧</span>
+                    <h3>가족 저녁 메뉴 고민</h3>
+                    <p>온 가족이 "나 아무거나"를 외칠 때, 저녁 메뉴 추천기로 공정하게 랜덤 결정하세요.</p>
+                </div>
+                <div class="situation-card">
+                    <span class="situation-icon" aria-hidden="true">🍱</span>
+                    <h3>혼밥 메뉴 결정</h3>
+                    <p>혼자 저녁 먹을 때도 고민은 됩니다. 라멘, 규동, 냉면 등 혼밥 메뉴도 추천해드려요.</p>
+                </div>
+                <div class="situation-card">
+                    <span class="situation-icon" aria-hidden="true">📱</span>
+                    <h3>배달 주문 전</h3>
+                    <p>배달앱 열기 전, 저녁 메뉴를 먼저 정하면 고르는 시간이 절반으로 줄어듭니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- GEO: 서비스 사용 방법 (HowTo 가시화) - AI가 단계별 가이드를 인용하기 좋은 형식 -->
+        <section class="howto-section" aria-label="저녁 메뉴 추천기 사용 방법">
+            <h2>사용 방법 — 10초면 충분해요</h2>
+            <ol class="howto-steps">
+                <li>
+                    <strong>접속</strong>
+                    <span>thedevlab.dev에 접속합니다. 앱 설치·로그인 불필요.</span>
+                </li>
+                <li>
+                    <strong>버튼 클릭</strong>
+                    <span>'🎲 메뉴 추천받기' 버튼을 누르면 30가지 메뉴 중 하나가 랜덤으로 추천됩니다.</span>
+                </li>
+                <li>
+                    <strong>결정 완료</strong>
+                    <span>마음에 들면 바로 주문! 마음에 안 들면 다시 버튼을 눌러보세요.</span>
+                </li>
+            </ol>
+        </section>
+
+        <!-- GEO + SEO: 메뉴 목록 (AI가 구체적 데이터를 인용하기 좋은 형식) -->
+        <section class="seo-content" aria-label="추천 메뉴 종류 안내">
+            <h2>2026년 현재 추천 메뉴 30가지</h2>
+            <p>저녁 메뉴 추천기는 매주 업데이트되는 30가지 메뉴를 무료로 추천해드립니다.</p>
             <ul>
-                <li><strong>한식</strong>: 삼겹살, 치킨, 떡볶이, 삼계탕, 김치찌개, 된장찌개 등</li>
-                <li><strong>일식·아시아식</strong>: 초밥, 라멘, 쌀국수, 카레, 샤부샤부</li>
-                <li><strong>양식</strong>: 피자, 파스타, 스테이크, 버거, 타코</li>
-                <li><strong>중식</strong>: 짜장면, 짬뽕, 마라탕, 볶음밥</li>
+                <li><strong>한식 (12가지)</strong>: 삼겹살, 치킨, 떡볶이, 삼계탕, 김치찌개, 된장찌개, 불고기, 갈비탕, 순두부찌개, 비빔밥, 냉면, 제육볶음</li>
+                <li><strong>일식·아시아식 (5가지)</strong>: 초밥, 라멘, 쌀국수, 카레, 샤부샤부</li>
+                <li><strong>양식 (5가지)</strong>: 피자, 파스타, 스테이크, 버거, 타코</li>
+                <li><strong>중식·기타 (8가지)</strong>: 짜장면, 짬뽕, 마라탕, 볶음밥, 규동, 연어덮밥, 샤부샤부, 카레</li>
             </ul>
+        </section>
+
+        <!-- GEO: 가시적 FAQ (대화형 Q&A - AI가 직접 인용하는 핵심 섹션) -->
+        <section class="faq-section" aria-label="자주 묻는 질문">
+            <h2>자주 묻는 질문</h2>
+
+            <details>
+                <summary>오늘 저녁 뭐 먹을지 모르겠어요. 어떻게 하나요?</summary>
+                <p>'메뉴 추천받기' 버튼을 클릭하면 한식, 일식, 중식, 양식 등 30가지 메뉴 중 하나를 무작위로 추천해드립니다. 마음에 들지 않으면 다시 눌러보세요. <strong>10초면 저녁 메뉴 고민 끝!</strong></p>
+            </details>
+
+            <details>
+                <summary>퇴근 후 피곤한 직장인도 쉽게 쓸 수 있나요?</summary>
+                <p>네! 저녁 메뉴 추천기는 버튼 하나만 누르면 됩니다. 회원가입·앱 설치 없이, 스마트폰 브라우저에서 바로 사용 가능합니다. 퇴근길 지하철에서도 사용할 수 있어요.</p>
+            </details>
+
+            <details>
+                <summary>가족과 저녁 메뉴 결정할 때 싸우지 않으려면요?</summary>
+                <p>저녁 메뉴 추천기로 랜덤 추첨하면 누구의 의견도 아닌 공정한 결정이 됩니다. 가족 모두가 동의할 수 없을 때 "기계가 뽑았으니 이걸로!"라는 합리적 해결책이 됩니다.</p>
+            </details>
+
+            <details>
+                <summary>배달 음식 주문할 때 어떤 메뉴를 시킬지 모르겠어요.</summary>
+                <p>배달앱을 열기 전 저녁 메뉴 추천기에서 먼저 메뉴를 정하면 배달앱에서 탐색 시간이 줄어듭니다. 추천된 메뉴로 바로 검색하면 주문이 빨라집니다.</p>
+            </details>
+
+            <details>
+                <summary>혼밥(혼자 먹기)에 적합한 메뉴도 추천해주나요?</summary>
+                <p>네! 라멘, 규동, 냉면, 비빔밥, 짜장면, 초밥 등 혼자 먹기 좋은 메뉴도 포함되어 있습니다. 버튼을 여러 번 눌러서 혼밥하기 좋은 메뉴를 찾아보세요.</p>
+            </details>
+
+            <details>
+                <summary>이 서비스는 무료인가요?</summary>
+                <p>완전 무료입니다. 현재도, 앞으로도 무료로 제공할 예정입니다. 회원가입·결제·앱 설치가 일절 필요 없습니다.</p>
+            </details>
         </section>
     </div>
 

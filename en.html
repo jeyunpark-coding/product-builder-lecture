@@ -45,30 +45,131 @@
     <meta name="twitter:description" content="One click to get a free random dinner recommendation from 30 dishes!">
     <meta name="twitter:image" content="https://thedevlab.dev/og-image.png">
 
-    <!-- SEO: JSON-LD Structured Data -->
+    <!-- GEO + SEO: JSON-LD Structured Data
+         WebApplication + FAQPage (conversational) + HowTo + Organization
+         → Optimized for AI search citation (ChatGPT, Gemini, Perplexity, etc.)
+    -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@graph": [
         {
+          "@type": "Organization",
+          "@id": "https://thedevlab.dev/#organization",
+          "name": "Dinner Menu Recommender",
+          "url": "https://thedevlab.dev/",
+          "description": "Free random dinner menu recommendation service. 30 dishes across Korean, Japanese, Chinese, and Western cuisines.",
+          "foundingDate": "2025",
+          "knowsAbout": ["dinner menu", "meal recommendation", "Korean food", "Japanese food", "random meal picker"]
+        },
+        {
           "@type": "WebApplication",
           "@id": "https://thedevlab.dev/en.html#webapp",
           "name": "Dinner Menu Recommender",
           "url": "https://thedevlab.dev/en.html",
-          "description": "Can't decide what to eat for dinner? Click once to get a free random recommendation from 30 Korean, Japanese, Chinese, and Western dishes.",
+          "description": "Can't decide what to eat for dinner? Click once to get a free random recommendation from 30 Korean, Japanese, Chinese, and Western dishes. No sign-up needed.",
           "applicationCategory": "LifestyleApplication",
           "operatingSystem": "Any",
+          "dateModified": "2026-03-27",
           "offers": {
             "@type": "Offer",
             "price": "0",
-            "priceCurrency": "USD"
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock"
           },
           "inLanguage": ["en", "ko"],
           "featureList": [
-            "Random dinner menu recommendation",
-            "30 dishes: Korean, Japanese, Chinese, Western",
+            "Random dinner menu recommendation (30 dishes)",
+            "Korean, Japanese, Chinese, Western cuisine",
             "Dark mode support",
-            "Korean & English language support"
+            "No sign-up required",
+            "Works on all devices"
+          ]
+        },
+        {
+          "@type": "HowTo",
+          "@id": "https://thedevlab.dev/en.html#howto",
+          "name": "How to use the Dinner Menu Recommender",
+          "description": "Get a random dinner menu recommendation in under 10 seconds.",
+          "totalTime": "PT10S",
+          "estimatedCost": {
+            "@type": "MonetaryAmount",
+            "currency": "USD",
+            "value": "0"
+          },
+          "step": [
+            {
+              "@type": "HowToStep",
+              "position": 1,
+              "name": "Visit the site",
+              "text": "Go to thedevlab.dev/en.html in any browser. No app installation or sign-up required."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 2,
+              "name": "Click the button",
+              "text": "Click '🎲 Recommend a Menu'. The app randomly picks one of 30 dishes from Korean, Japanese, Chinese, or Western cuisine."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 3,
+              "name": "Repeat until satisfied",
+              "text": "Don't like the suggestion? Click again! Keep going until you find the perfect dinner for tonight."
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://thedevlab.dev/en.html#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What should I eat for dinner tonight?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Visit thedevlab.dev and click 'Recommend a Menu' to get an instant random suggestion from 30 dishes including Korean BBQ, sushi, pizza, ramen, and more. You'll have your dinner decided in under 10 seconds."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What dinner menu options are available?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "30 dishes total: Korean (12): Samgyeopsal, Fried Chicken, Tteokbokki, Samgyetang, Kimchi Jjigae, Doenjang Jjigae, Bulgogi, Galbitang, Sundubu Jjigae, Bibimbap, Naengmyeon, Jeyuk Bokkeum. Japanese & Asian (5): Sushi, Ramen, Pho, Curry, Shabu-shabu. Western (5): Pizza, Pasta, Steak, Burger, Tacos. Chinese (4+): Jjajangmyeon, Jjamppong, Malatang, Fried Rice."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is the Dinner Menu Recommender free to use?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, it's completely free. No sign-up, no login, no app installation required. Just open your browser and go."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "I'm tired after work and can't decide what to eat. What should I do?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The Dinner Menu Recommender is perfect for this situation. One tap on your phone gives you a random dinner idea instantly — no thinking required. It works directly in your mobile browser."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I use this to settle family dinner disagreements?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Absolutely! When family members can't agree on dinner, let the random picker decide. It's a fair, neutral way to end the 'I don't know, what do you want?' loop."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Does it work on mobile phones?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes! The Dinner Menu Recommender is fully responsive and works on all smartphones, tablets, and desktop computers. No app download needed."
+              }
+            }
           ]
         },
         {
@@ -139,16 +240,92 @@
             </a>
         </div>
 
-        <!-- SEO: Content for search engine context -->
-        <section class="seo-content" aria-label="Service description">
-            <h2>Free Random Dinner Menu Picker</h2>
-            <p>Struggling with "what's for dinner?" every night? Our free dinner menu recommender randomly picks the perfect meal from 30 options across Korean, Japanese, Chinese, and Western cuisines.</p>
+        <!-- GEO: Situational use cases (Who/When/How) -->
+        <section class="geo-situations" aria-label="When to use the dinner menu recommender">
+            <h2>Perfect for These Situations</h2>
+            <div class="situation-grid">
+                <div class="situation-card">
+                    <span class="situation-icon" aria-hidden="true">💼</span>
+                    <h3>After a Long Work Day</h3>
+                    <p>Too tired to think about dinner? One tap gives you an instant recommendation. No brainpower required.</p>
+                </div>
+                <div class="situation-card">
+                    <span class="situation-icon" aria-hidden="true">👨‍👩‍👧</span>
+                    <h3>Family Dinner Dilemma</h3>
+                    <p>When everyone says "I don't know, you pick" — let the random picker end the loop fairly.</p>
+                </div>
+                <div class="situation-card">
+                    <span class="situation-icon" aria-hidden="true">🍱</span>
+                    <h3>Eating Alone Tonight</h3>
+                    <p>Solo dinner decisions can still be tough. Get a quick suggestion and order without overthinking.</p>
+                </div>
+                <div class="situation-card">
+                    <span class="situation-icon" aria-hidden="true">📱</span>
+                    <h3>Before Opening Delivery Apps</h3>
+                    <p>Decide the dish first, then search for it in your delivery app. Saves you 10+ minutes of scrolling.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- GEO: HowTo steps (visible) -->
+        <section class="howto-section" aria-label="How to use the dinner menu recommender">
+            <h2>How It Works — Under 10 Seconds</h2>
+            <ol class="howto-steps">
+                <li>
+                    <strong>Open the site</strong>
+                    <span>Visit thedevlab.dev/en.html — no app, no sign-up, no login.</span>
+                </li>
+                <li>
+                    <strong>Click the button</strong>
+                    <span>Hit '🎲 Recommend a Menu' and instantly get one of 30 dinner options.</span>
+                </li>
+                <li>
+                    <strong>Done!</strong>
+                    <span>Happy with it? Go order. Not feeling it? Click again!</span>
+                </li>
+            </ol>
+        </section>
+
+        <!-- GEO + SEO: Menu list with specific data AI can cite -->
+        <section class="seo-content" aria-label="Available dinner menu options">
+            <h2>30 Dinner Menu Options (Updated 2026)</h2>
+            <p>Our free dinner recommender covers 30 dishes across 4 cuisines, updated regularly to stay current.</p>
             <ul>
-                <li><strong>Korean</strong>: Samgyeopsal, Fried Chicken, Tteokbokki, Samgyetang, Kimchi Jjigae and more</li>
-                <li><strong>Japanese & Asian</strong>: Sushi, Ramen, Pho, Curry, Shabu-shabu</li>
-                <li><strong>Western</strong>: Pizza, Pasta, Steak, Burger, Tacos</li>
-                <li><strong>Chinese</strong>: Jjajangmyeon, Jjamppong, Malatang, Fried Rice</li>
+                <li><strong>Korean (12 dishes)</strong>: Samgyeopsal, Fried Chicken, Tteokbokki, Samgyetang, Kimchi Jjigae, Doenjang Jjigae, Bulgogi, Galbitang, Sundubu Jjigae, Bibimbap, Naengmyeon, Jeyuk Bokkeum</li>
+                <li><strong>Japanese & Asian (5 dishes)</strong>: Sushi, Ramen, Pho, Curry, Shabu-shabu</li>
+                <li><strong>Western (5 dishes)</strong>: Pizza, Pasta, Steak, Burger, Tacos</li>
+                <li><strong>Chinese & Others (8 dishes)</strong>: Jjajangmyeon, Jjamppong, Malatang, Fried Rice, Gyudon, Salmon Bowl, Shabu-shabu, Curry</li>
             </ul>
+        </section>
+
+        <!-- GEO: Visible FAQ (conversational Q&A format — what AI systems cite) -->
+        <section class="faq-section" aria-label="Frequently asked questions">
+            <h2>Frequently Asked Questions</h2>
+
+            <details>
+                <summary>What should I eat for dinner tonight?</summary>
+                <p>Click '🎲 Recommend a Menu' on this page to get an instant random dinner suggestion from 30 dishes. You'll have your answer in under 10 seconds — no more endless scrolling through delivery apps.</p>
+            </details>
+
+            <details>
+                <summary>I'm tired after work and can't decide what to eat. Help!</summary>
+                <p>The Dinner Menu Recommender was made exactly for this. One tap on your phone, one random dinner suggestion — done. Works directly in your mobile browser, no app needed.</p>
+            </details>
+
+            <details>
+                <summary>My family can't agree on dinner. What do we do?</summary>
+                <p>Let the random picker decide! It's a fair, neutral way to end the "I don't care, you choose" conversation. If nobody likes the first pick, just tap again together.</p>
+            </details>
+
+            <details>
+                <summary>What kinds of food does it recommend?</summary>
+                <p>30 dishes total: 12 Korean dishes (Samgyeopsal, Fried Chicken, Bibimbap…), 5 Japanese & Asian dishes (Sushi, Ramen, Pho…), 5 Western dishes (Pizza, Pasta, Steak…), and 8 Chinese & other dishes (Ramen, Malatang, Fried Rice…).</p>
+            </details>
+
+            <details>
+                <summary>Is this service really free?</summary>
+                <p>100% free — now and always. No account, no subscription, no app installation. Just open your browser and click.</p>
+            </details>
         </section>
     </div>
 
